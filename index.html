@@ -5,12 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
 </head>
 <body>
-    <h1>This is a title</h1>
-    <p>This is a paragraph</p>
-    <p>This is a second paragraph</p>
-    <p>THIS IS A THIRD PARAGRAPH</p>
+
+
+    <script>
+        d3.json("users.json", function(error, data) {
+            console.log(data);
+
+            
+            if (error) {
+                return console.warn(error);
+            }
+
+            d3.select("body")
+                .selectAll("p")
+                .data(data)
+                .enter()
+                .append("p")
+                .text(function(d) {
+                    return d.name + ", " + d.location;
+                });
+
+        });
+    </script>
 </body>
+
 </html>
